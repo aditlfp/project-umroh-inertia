@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('tips', function (Blueprint $table) {
             $table->id();
+            $table->string('img');
             $table->timestamps();
         });
     }
