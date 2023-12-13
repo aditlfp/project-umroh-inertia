@@ -4,7 +4,7 @@ import NavLink from "./NavLink";
 
 function Navbar() {
     return (
-        <nav className="bg-white py-5">
+        <nav className="bg-transparent py-5 shadow-sm">
             <div className="h-auto">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center">
