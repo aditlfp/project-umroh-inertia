@@ -40,10 +40,11 @@ class PaketController extends Controller
 
         try {
             Paket::create($paket);
+            return to_route('paket.index')->with(['message' => 'Paket Has Been Created!']);
         } catch(\Illuminate\Database\QueryException $e){
            return redirect()->back()->with(['message' => 'Paket Has Found!']);
         }
-        return redirect()->back()->with(['message' => 'Paket Has Been Created!']);
+        
     }
 
     public function edit($id)
@@ -85,7 +86,7 @@ class PaketController extends Controller
                 return redirect()->back()->with(['message' => 'Paket Not Found']);
             }
             $paketId->update($paket);
-            return to_route('')->with(['message' => 'Paket Has Been Updated!']);
+            return to_route('paket.index')->with(['message' => 'Paket Has Been Updated!']);
         } catch (\Throwable $th) {
             Log::error($th);
             return redirect()->back()->with(['message' => 'Paket Not Found']);
@@ -100,11 +101,11 @@ class PaketController extends Controller
                 return redirect()->back()->with(['message' => 'Paket Not Found']);
             }
 
-            if ($paketId->image == null) {
+            if ($paketId->img == null) {
                 return redirect()->back()->with(['message' => 'Image Paket Not Found']);
             }
-            if ($paketId->image) {
-                Storage::disk('public')->delete('images/'.$paketId->image);
+            if ($paketId->img) {
+                Storage::disk('public')->delete('images/'.$paketId->img);
             }
 
             $paketId->delete();

@@ -31,7 +31,7 @@ class RoleController extends Controller
         $role = new Role();
         $role = $request->all();
         Role::create($role);
-        return to_route('');
+        return to_route('role.index')->with(['message' => 'Role Has Been Create']);
     }
 
     public function edit($id)
@@ -60,7 +60,7 @@ class RoleController extends Controller
                 return redirect()->back()->with(['message' => 'Role Not Found']);
             }
             $roleId->update($role);
-            return to_route('')->with(['message' => 'Role Has Been Update!!']);
+            return to_route('role.index')->with(['message' => 'Role Has Been Update!!']);
         } catch (\Throwable $th) {
             Log::error($th);
             return redirect()->back()->with(['message' => 'Role Not Found']);
