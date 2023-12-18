@@ -1,5 +1,5 @@
+import AdminLayout from "@/Pages/Admin/AdminLayout";
 import { useState } from "react";
-import Sidebar from "./SidebarLayout/Sidebar";
 
 export default function Authenticated({ user, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
@@ -7,9 +7,7 @@ export default function Authenticated({ user, header, children }) {
 
     return (
         <>
-            <Sidebar user={user}>
-
-            </Sidebar>
+            <AdminLayout user={user}>{children}</AdminLayout>
         </>
     );
 }

@@ -6,6 +6,7 @@ use App\Http\Requests\TipsRequest;
 use App\Http\Resources\TipsResource;
 use App\Models\Tips;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -14,7 +15,8 @@ class TipsController extends Controller
 {
     public function index()
     {
-        $tips = new TipsResource(Tips::paginate(15));
+        $tip = DB::table('tips')->paginate(15);
+        $tips = TipsResource::collection($tip);
 
         return Inertia::render('Admin/Tips/TipsIndex', ['tips' => $tips]);
     }

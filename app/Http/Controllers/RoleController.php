@@ -14,9 +14,10 @@ class RoleController extends Controller
 {
     public function index(Request $request)
     {
-        $role = new RoleResource(Role::when($request->search, function ($query, $search){
+        $roles = DB::table('roles')->when($request->search, function ($query, $search){
             $query->where('name', 'LIKE', '%' . $search . '%');
-        })->paginate(15));
+        })->paginate(50);
+        $role =  RoleResource::collection($roles);
 
         return Inertia::render('Admin/Role/RoleIndex', ['role' => $role]);
     }

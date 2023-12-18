@@ -6,6 +6,7 @@ use App\Http\Requests\HotelRequest;
 use App\Http\Resources\HotelResource;
 use App\Models\Hotel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -14,7 +15,8 @@ class HotelController extends Controller
 {
     public function index()
     {
-        $hotel = new HotelResource(Hotel::paginate(15));
+        $hotels = DB::table('hotels')->paginate(50);
+        $hotel =  HotelResource::collection($hotels);
 
         return Inertia::render('Admin/Hotel/HotelIndex', ['hotel' => $hotel]);
     }

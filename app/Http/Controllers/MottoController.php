@@ -7,6 +7,7 @@ use App\Http\Resources\MottoResource;
 use App\Models\Hotel;
 use App\Models\Motto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
@@ -18,9 +19,10 @@ class MottoController extends Controller
     // 'hotel_id'
     public function index(Request $request)
     {
-        $moto = new MottoResource(Motto::with('Hotel')->when($request->search, function ($query, $search){
+        $motto = DB::table('mottoes')->when($request->search, function ($query, $search){
             $query->where('name', 'LIKE', '%' . $search . '%');
-        })->paginate(15));
+        })->paginate(50);
+        $moto =  MottoResource::collection($motto);
 
         return Inertia::render('Admin/Motto/MottoIndex', ['moto' => $moto]);
     }

@@ -6,6 +6,7 @@ use App\Http\Requests\FotoRequest;
 use App\Http\Resources\FotoResouce;
 use App\Models\Foto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -14,7 +15,8 @@ class FotoController extends Controller
 {
     public function index()
     {
-        $foto = new FotoResouce(Foto::paginate(15));
+        $fotos = DB::table('fotos')->paginate(15);
+        $foto =  FotoResouce::collection($fotos);
 
         return Inertia::render('Admin/Foto/FotoIndex', ['foto' => $foto]);
     }

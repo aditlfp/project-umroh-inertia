@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\PaketResource;
 use App\Models\Paket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -13,9 +14,10 @@ class PaketController extends Controller
 {
     public function index(Request $request)
     {
-        $paket = new PaketResource(Paket::when($request->search, function ($query, $search){
+        $pakets = DB::table('pakets')->when($request->search, function ($query, $search){
             $query->where('name', 'LIKE', '%' . $search . '%');
-        })->paginate(15));
+        })->paginate(50);
+        $paket =  PaketResource::collection($pakets);
 
         return Inertia::render('Admin/Paket/PaketIndex', ['paket' => $paket]);
     }
