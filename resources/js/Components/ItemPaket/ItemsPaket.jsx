@@ -7,7 +7,8 @@ import { useInView } from "react-intersection-observer";
 import bgUmroh from "../../../img-local/umroh.jpg";
 import Modal from "../Modal";
 
-function ItemsPaket() {
+function ItemsPaket({ datas }) {
+    console.log(datas);
     const [show, setShow] = useState(false);
     const refs = useRef(null);
     const [image, setImage] = useState();

@@ -1,7 +1,22 @@
 import ItemsPaket from "@/Components/ItemPaket/ItemsPaket";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 
-function PaketLayout() {
+function PaketLayout({ dataPaket, props }) {
+    console.log("from layout", props);
+    useEffect(() => {
+        if (dataPaket) {
+            // 👇 Will scroll smoothly to the top of the next section
+            const nextSection = document.getElementById(`${dataPaket}`);
+            if (nextSection) {
+                nextSection.scrollIntoView({ behavior: "smooth" });
+            } else {
+                // Handle the case where there is no next section
+                console.warn("No next section found.");
+            }
+        }
+    }, [dataPaket]);
+
     return (
         <>
             <Helmet>
@@ -20,14 +35,17 @@ function PaketLayout() {
                     rel="stylesheet"
                 />
             </Helmet>
-            <div className="flex flex-col items-center justify-center my-10">
+            <div
+                id="pilihan-paket"
+                className="flex flex-col items-center justify-center my-10"
+            >
                 <h1
                     className="text-gray-500 font-semibold text-xl"
                     style={{ fontFamily: "Poppins, sans-serif" }}
                 >
-                {/* Change This To Dinamic */}
+                    {/* Change This To Dinamic */}
                     Paket Ramadhan 2024
-                {/* Change This To Dinamic */}
+                    {/* Change This To Dinamic */}
                 </h1>
 
                 <h2
@@ -37,7 +55,7 @@ function PaketLayout() {
                     Pilihan Terbaik Anda
                 </h2>
             </div>
-            <ItemsPaket />
+            <ItemsPaket datas={props} />
         </>
     );
 }
