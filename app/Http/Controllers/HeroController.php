@@ -6,23 +6,19 @@ use App\Http\Requests\HeroRequest;
 use App\Http\Resources\HeroResource;
 use App\Models\Hero;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class HeroController extends Controller
 {
-
-    // 'title' => ['required'],
-    // 'bulan' => ['required'],
-    // 'tahun' => ['required'],
-    // 'sub_title' => ['required'],
-    // 'img' => ['required', 'mimes:png,jpg,jpeg', 'max:3072'], 
     public function index(Request $request)
     {
-        $hero = new HeroResource(Hero::when($request->search, function ($query, $search){
+        $heros = DB::table('heroes')->when($request->search, function ($query, $search){
             $query->where('title', 'LIKE', '%' . $search . '%');
-        })->paginate(15));
+        })->paginate(15);
+        $hero = HeroResource::collection($heros);
 
         return Inertia::render('Admin/Hero/HeroIndex', ['hero' => $hero]);
     }
