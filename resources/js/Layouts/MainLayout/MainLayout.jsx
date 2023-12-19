@@ -1,20 +1,35 @@
 import Navbar from "@/Components/Navbar";
 import { motion, useAnimation } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import Poppins from "../../../font/Poppins-ExtraBold.ttf";
 import Mekkah from "../../../img-local/bg-mekkah.png";
+import FooterLayout from "../FooterLayout/FooterLayout";
+import GalerryLayout from "../GalleryLayout/GalerryLayout";
 import MottoLayout from "../MottoLayout/MottoLayout";
 import PaketLayout from "../PaketLayout/PaketLayout";
-import GalerryLayout from "../GalleryLayout/GalerryLayout";
 import TipsLayout from "../TipsLayout/TipsLayout";
-import FooterLayout from "../FooterLayout/FooterLayout";
 
-function MainLayout() {
+function MainLayout(
+    dataHero,
+    dataFoto,
+    dataHotel,
+    dataMoto,
+    dataPaket,
+    dataTips
+) {
+    // dataHero={hero}
+    // dataFoto={foto}
+    // dataHotel={hotel}
+    // dataMoto={moto}
+    // dataPaket={paket}
+    // dataTips={tips}
+
+    const [paket, setPaket] = useState();
+
     const styles = {
         fontWeight: "900",
     };
-
     const controls = useAnimation();
 
     useEffect(() => {
@@ -26,6 +41,10 @@ function MainLayout() {
         // Replace 'https://example.com' with the desired URL
         // window.location.href = "https://baca-alquran.sac-po.com";
         window.open("https://baca-alquran.sac-po.com", "_blank");
+    };
+
+    const handleDataPush = () => {
+        setPaket("pilihan-paket");
     };
 
     return (
@@ -97,7 +116,10 @@ function MainLayout() {
 
                         {/* Button */}
                         <div className="flex mx-9 mt-2 gap-5 py-2">
-                            <button className="bg-amber-500 hover:bg-amber-600 active:bg-amber-700 focus:bg-amber-700 focus:ring-0 py-3 px-5 rounded-xl font-medium text-white transition ease-in-out duration-150">
+                            <button
+                                onClick={() => handleDataPush()}
+                                className="bg-amber-500 hover:bg-amber-600 active:bg-amber-700 focus:bg-amber-700 focus:ring-0 py-3 px-5 rounded-xl font-medium text-white transition ease-in-out duration-150"
+                            >
                                 Lihat Paket
                             </button>
                             <button
@@ -133,11 +155,30 @@ function MainLayout() {
                     </div>
                 </span>
             </motion.div>
-            <MottoLayout />
-            <PaketLayout />
-            <GalerryLayout />
-            <TipsLayout />
-            <FooterLayout />
+            <>
+                {dataFoto || dataHotel || dataMoto || dataPaket || dataTips ? (
+                    <>
+                        <MottoLayout props={dataMoto} propsHotel={dataHotel} />
+                        <PaketLayout dataPaket={dataPaket} props={dataPaket} />
+                        <GalerryLayout props={dataFoto} />
+                        <TipsLayout props={dataTips} />
+                    </>
+                ) : (
+                    <>
+                        <div role="status" className="max-w-sm animate-pulse">
+                            <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                            <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px] mb-2.5"></div>
+                            <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                            <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[330px] mb-2.5"></div>
+                            <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[300px] mb-2.5"></div>
+                            <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+                            <span className="sr-only">Loading...</span>
+                        </div>
+                    </>
+                )}
+
+                <FooterLayout />
+            </>
         </>
     );
 }
