@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FotoController;
 use App\Http\Controllers\HeroController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\MottoController;
 use App\Http\Controllers\PaketController;
@@ -23,9 +24,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Main');
-});
+Route::get('/', [HomeController::class, 'index']);
 
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');
