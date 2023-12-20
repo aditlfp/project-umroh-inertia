@@ -4,7 +4,9 @@ function MottoIndex() {
     return (
         <>
             <Authenticated>
-                <div>MottoIndex</div>
+                <div>
+                    
+                </div>
             </Authenticated>
         </>
     );
