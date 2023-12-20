@@ -1,5 +1,5 @@
 <?php
-use Intervention\Image\Image;
+use Intervention\Image\Facades\Image;
 
 
 function UploadImage($request, $NameFile)
