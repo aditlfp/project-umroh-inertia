@@ -4,7 +4,7 @@ import NavLink from "./NavLink";
 
 function Navbar() {
     return (
-        <nav className="bg-transparent py-5 shadow-sm">
+        <nav className="bg-white z-[9999999999999] py-5 shadow-sm sticky top-0">
             <div className="h-auto">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center">
@@ -49,7 +49,9 @@ function Navbar() {
                         </div>
                     </div>
                     <div className="flex gap-3 mx-10">
-                        <NavLink className="font-bold">Booking</NavLink>
+                        <NavLink className="font-bold hidden sm:block">
+                            Booking
+                        </NavLink>
                         <img width={130} height={120} src={menara2} />
                     </div>
                 </div>
