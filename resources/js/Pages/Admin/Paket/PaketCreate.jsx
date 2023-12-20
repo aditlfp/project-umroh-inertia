@@ -14,12 +14,24 @@ function PaketCreate({ closeModal }) {
         remember: false,
     });
 
-    console.log(data);
+    // console.log(data);
 
     const submit = (e) => {
         e.preventDefault();
-        toast.success("Paket Has Been Created!");
-        post(route("paket.store"));
+        if (!data.img) {
+            // Show an error toast message when image field is empty
+            toast.error("Tolong Masukkan Gambar");
+            return; // Prevent further execution of the form submission
+        } else if (!data.name) {
+            toast.error("Tolong Masukkan Nama");
+            return;
+        }
+        post(route("paket.store"), {
+            onSuccess: () => {
+                toast.success("Paket Has Been Created!");
+                closeModal();
+            },
+        });
     };
 
     const submitForm = (e) => {
@@ -56,6 +68,7 @@ function PaketCreate({ closeModal }) {
                         name="img"
                         onChange={(e) => setData("img", e.target.files[0])}
                         className="hidden"
+                        accept="image/*"
                     />
                     {errors.img && (
                         <span className="text-red-500">{errors.img}</span>

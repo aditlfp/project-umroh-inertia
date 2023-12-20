@@ -5,9 +5,12 @@ import { useEffect, useRef, useState } from "react";
 import PaketCreate from "./PaketCreate";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { usePage } from "@inertiajs/react";
 
-function PaketIndex() {
+function PaketIndex({ paket }) {
     const [modalPaket, setModalPaket] = useState(false);
+    const page = usePage();
+    console.log(paket);
 
     const modalRef = useRef(null);
 
@@ -37,7 +40,6 @@ function PaketIndex() {
             <ToastContainer />
             <Authenticated>
                 <div className="flex flex-col">
-                    <ItemsPaket />
                     <div className="flex items-center justify-end mx-10">
                         <button
                             onClick={() => modalCreate()}
@@ -46,6 +48,7 @@ function PaketIndex() {
                             add new +
                         </button>
                     </div>
+                    <ItemsPaket datas={paket} />
                 </div>
                 <AnimatePresence>
                     {modalPaket && (

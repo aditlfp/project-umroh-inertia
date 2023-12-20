@@ -36,8 +36,8 @@ function Sidebar({ user, children, onDataClick }) {
 
     return (
         <>
-            <div className="flex min-h-screen bg-[#FFFFFF]">
-                <section id="sidebar" className="max-h-screen bg-[#282A3A]">
+            <div className="flex min-h-full bg-[#FFFFFF]">
+                <section id="sidebar" className="max-h-full bg-[#282A3A]">
                     <div className="w-56">
                         <div
                             id="name-user"

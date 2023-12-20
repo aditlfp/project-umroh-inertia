@@ -61,99 +61,92 @@ function ItemsPaket({ datas }) {
     };
 
     return (
-        <div className="flex" id="pilihan-paket">
+        <div className="grid grid-cols-4" id="pilihan-paket">
             <Helmet>
                 <link
                     href="https://fonts.cdnfonts.com/css/jano-sans-pro"
                     rel="stylesheet"
                 />
             </Helmet>
-            {/* Change This To Data Dynamic */}
-            <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="box hover:cursor-pointer"
-            >
+            {datas.data.map((dat, i) => (
                 <motion.div
-                    ref={ref}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={controls}
-                    transition={{ duration: 0.6 }}
-                    className="mx-10 mb-10"
-                    onClick={() => handleClick(data.datas[0].id)}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="box hover:cursor-pointer my-4"
                 >
-                    <img
-                        id="1"
-                        className="w-[314px] h-[457px] shadow"
-                        src="https://placehold.jp/314x457.png"
-                    />
+                    <motion.div
+                        ref={ref}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={controls}
+                        transition={{ duration: 0.6 }}
+                        className="mx-10 mb-10"
+                        onClick={() => handleClick(data.datas[0].id)}
+                    >
+                        <span>
+                            <img
+                                id="1"
+                                className="w-[200px] h-[375px] shadow"
+                                src={`/storage/images/${dat.img}`} // Adjust the path to the image
+                                alt={`Image ${dat.id}`}
+                            />
+                            <span className="flex justify-between mx-5">
+                                <button className="py-2 px-4 rounded-lg">
+                                    edit
+                                </button>
+                                <button>Hapus</button>
+                            </span>
+                        </span>
+                    </motion.div>
                 </motion.div>
-            </motion.div>
+            ))}
+            {/* 
+<motion.div
+    whileHover={{ scale: 1.1 }}
+    whileTap={{ scale: 0.9 }}
+    className="box hover:cursor-pointer"
+>
+    <motion.div
+        ref={ref}
+        initial={{ opacity: 0, y: 20 }}
+        animate={controls}
+        transition={{ duration: 1.0 }}
+        className="mx-10 mb-10"
+        onClick={() => handleClick(data.datas[1].id)}
+    >
+        <img
+            id="2"
+            className="w-[314px] h-[457px] shadow"
+            src="https://placehold.jp/3d4070/ffffff/314x457.png"
+        />
+    </motion.div>
+</motion.div>
 
-            <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="box hover:cursor-pointer"
-            >
-                <motion.div
-                    ref={ref}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={controls}
-                    transition={{ duration: 1.0 }}
-                    className="mx-10 mb-10"
-                    onClick={() => handleClick(data.datas[1].id)}
-                >
-                    <img
-                        id="2"
-                        className="w-[314px] h-[457px] shadow"
-                        src="https://placehold.jp/3d4070/ffffff/314x457.png"
-                    />
-                </motion.div>
-            </motion.div>
+<motion.div
+    whileHover={{ scale: 1.1 }}
+    whileTap={{ scale: 0.9 }}
+    className="box hover:cursor-pointer"
+>
+    <motion.div
+        ref={ref}
+        initial={{ opacity: 0, y: 20 }}
+        animate={controls}
+        transition={{ duration: 1.4 }}
+        className="mx-10 mb-10"
+    >
+        <img
+            className="w-[314px] h-[457px] shadow"
+            src="https://placehold.jp/314x457.png"
+        />
+    </motion.div>
+</motion.div>
+ */}
 
-            <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="box hover:cursor-pointer"
-            >
-                <motion.div
-                    ref={ref}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={controls}
-                    transition={{ duration: 1.4 }}
-                    className="mx-10 mb-10"
-                >
-                    <img
-                        className="w-[314px] h-[457px] shadow"
-                        src="https://placehold.jp/314x457.png"
-                    />
-                </motion.div>
-            </motion.div>
-
-            <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="box hover:cursor-pointer"
-            >
-                <motion.div
-                    ref={ref}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={controls}
-                    transition={{ duration: 1.8 }}
-                    className="mx-10 mb-10"
-                >
-                    <img
-                        className="w-[314px] h-[457px] shadow"
-                        src="https://placehold.jp/314x457.png"
-                    />
-                </motion.div>
-            </motion.div>
             {/* Change This To Data Dynamic */}
 
             {/* Modal Handle Click */}
             <Modal id={id} show={show}>
                 <div
-                    className="bg-center bg-no-repeat bg-cover"
+                    className="bg-center bg-no-repeat bg-cover  flex flex-col justify-center items-center"
                     style={{ backgroundImage: `url(${bgUmroh})` }}
                 >
                     <div className="flex items-center justify-center">
@@ -161,7 +154,7 @@ function ItemsPaket({ datas }) {
                             <IoCloseCircleOutline className="text-white text-2xl font-semibold my-2" />
                         </button>
                     </div>
-                    <img srcSet={image} />
+                    <img srcSet={image} width={314} height={457} />
                     <div className="flex items-center justify-center">
                         <div
                             className="bg-green-700 flex px-5 rounded-md py-2 my-2 text-xl text-white gap-x-3 hover:cursor-pointer"
