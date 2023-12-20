@@ -3,7 +3,7 @@ import MainLayout from "@/Layouts/MainLayout/MainLayout";
 function Main({ hotel, hero, paket, tips, foto, moto }) {
     // 'hero', 'foto', 'hotel', 'moto', 'paket', 'tips'
     // console.log(hotel, hero, paket, tips, foto, moto);
-    // console.log(paket);
+    console.log(moto);
     return (
         <>
             <MainLayout

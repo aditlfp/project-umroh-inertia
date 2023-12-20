@@ -32,7 +32,8 @@ class HomeController extends Controller
         $hotel =  HotelResource::collection($hotels);
         // Hotel
         // Motto
-        $motto = DB::table('mottoes')->get();
+        $motto = DB::table('mottoes')->select('mottoes.id', 'mottoes.name', 'mottoes.desc', 'mottoes.hotel_id', 'hotels.img as hotel_img')
+        ->join('hotels', 'mottoes.hotel_id', '=', 'hotels.id')->get();
         $moto =  MottoResource::collection($motto);
         // Motto
         // Paket
