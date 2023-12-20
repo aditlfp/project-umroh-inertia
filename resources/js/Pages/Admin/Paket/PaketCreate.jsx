@@ -22,6 +22,10 @@ function PaketCreate({ closeModal }) {
         post(route("paket.store"));
     };
 
+    const submitForm = (e) => {
+        submit(e);
+    };
+
     return (
         <div>
             <form
@@ -86,21 +90,22 @@ function PaketCreate({ closeModal }) {
 
                     <InputError message={errors.name} className="mt-2" />
                 </div>
-                <div className="flex justify-between mt-5">
-                    <button
-                        onClick={closeModal}
-                        className="py-2 px-4 rounded-md bg-[#ce2f2f] text-white font-semibold"
-                    >
-                        Kembali
-                    </button>
-                    <button
-                        type="submit"
-                        className="py-2 px-4 rounded-md bg-[#C69749] text-white font-semibold"
-                    >
-                        Submit
-                    </button>
-                </div>
             </form>
+            <div className="flex justify-between mt-5">
+                <button
+                    onClick={closeModal}
+                    className="py-2 px-4 rounded-md bg-[#ce2f2f] text-white font-semibold"
+                >
+                    Kembali
+                </button>
+                <button
+                    onClick={submitForm}
+                    type="submit"
+                    className="py-2 px-4 rounded-md bg-[#C69749] text-white font-semibold"
+                >
+                    Submit
+                </button>
+            </div>
         </div>
     );
 }

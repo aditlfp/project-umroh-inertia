@@ -9,6 +9,7 @@ class Paket extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'img'
+        'img',
+        'name'
     ];
 }
