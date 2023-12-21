@@ -5,6 +5,8 @@ import { router, useForm } from "@inertiajs/react";
 import { RiImageAddLine } from "react-icons/ri";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import noImg from "../../../../img-local/no-image.jpg";
+import { useEffect, useState } from "react";
 
 function PaketEdit({ closeModal, datas }) {
     const { data, setData, patch, errors } = useForm({
@@ -13,6 +15,25 @@ function PaketEdit({ closeModal, datas }) {
         img: "",
         oldimage: datas.img,
     });
+
+    const [imgBefore, setImgBefore] = useState();
+    useEffect(() => {
+        async function fetchImage() {
+            try {
+                const response = await fetch(`/storage/images/${datas.img}`);
+                if (response.ok) {
+                    setImgBefore(`/storage/images/${datas.img}`);
+                } else {
+                    setImgBefore(noImg);
+                }
+            } catch (error) {
+                console.error("Error fetching image:", error);
+            }
+        }
+        if (datas.img) {
+            fetchImage();
+        }
+    }, [datas.img]);
 
     const submit = async (e) => {
         e.preventDefault();
@@ -75,7 +96,7 @@ function PaketEdit({ closeModal, datas }) {
                                 src={
                                     data.img
                                         ? URL.createObjectURL(data.img)
-                                        : `/storage/images/${data.oldimage}`
+                                        : imgBefore
                                 }
                                 alt="Image Preview"
                                 style={{ maxWidth: "160px" }}

@@ -11,12 +11,15 @@ import Modal from "../Modal";
 import { TbTrashXFilled } from "react-icons/tb";
 import PaketEDit from "@/Pages/Admin/Paket/PaketEdit";
 import PaketEdit from "@/Pages/Admin/Paket/PaketEdit";
+import { router } from "@inertiajs/react";
+import { toast } from "react-toastify";
 
 function ItemsPaket({ datas, sendDataToParent, edit, delet, dataEdit }) {
     const [show, setShow] = useState(false);
     const [showDel, setShowDel] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
     const [datasEdit, setDatasEdit] = useState();
+    const [dataDelete, setDataDelete] = useState();
     const [image, setImage] = useState();
     const [id, setId] = useState();
     const controls = useAnimation();
@@ -30,15 +33,19 @@ function ItemsPaket({ datas, sendDataToParent, edit, delet, dataEdit }) {
         }
     }, [controls, inView]);
 
-    const handleClick = (data) => {
-        const item = datas.data.find((item) => item.id === data.id);
+    const handleClick = async (data) => {
+        const item = datas.data.find((item) => item.id == data.id);
 
         if (item) {
             const { img } = item;
-            setImage("/storage/images/" + img);
+            const response = await fetch(`/storage/images/${img}`);
+            if (response.ok) {
+                setImage("/storage/images/" + img);
+            } else {
+                setImage(noImg);
+            }
             setId(id);
             setShow(!show);
-            dataEdit(item);
         }
     };
 
@@ -57,9 +64,22 @@ function ItemsPaket({ datas, sendDataToParent, edit, delet, dataEdit }) {
         );
     };
 
-    function handleDelete() {
+    function handleDelete(id) {
+        const item = datas.data.find((item) => item.id === id);
         setShowDel(!showDel);
+        setDataDelete(item);
     }
+    const handleDeleted = async (e) => {
+        e.preventDefault();
+        try {
+            router.delete(`paket/${dataDelete.id}`);
+            toast.warn("Done");
+            setShowDel(!showDel);
+        } catch (error) {
+            toast.error("Telah Terjadi Error");
+            console.error(error);
+        }
+    };
 
     function handleEdit(id) {
         const item = datas.data.find((item) => item.id === id);
@@ -67,6 +87,7 @@ function ItemsPaket({ datas, sendDataToParent, edit, delet, dataEdit }) {
         setDatasEdit(item);
     }
     const modalRef = useRef(null);
+    const modalDel = useRef(null);
 
     const [imageExistsArray, setImageExistsArray] = useState([]);
     const [imageLoading, setImageLoading] = useState(true);
@@ -122,7 +143,7 @@ function ItemsPaket({ datas, sendDataToParent, edit, delet, dataEdit }) {
                                     animate={controls}
                                     transition={{ duration: 0.6 }}
                                 >
-                                    <div>
+                                    <div className="flex items-center justify-center">
                                         <img
                                             src={
                                                 imageExistsArray[i]
@@ -130,7 +151,9 @@ function ItemsPaket({ datas, sendDataToParent, edit, delet, dataEdit }) {
                                                     : noImg
                                             }
                                             alt="image"
-                                            width={270}
+                                            width={
+                                                imageExistsArray[i] ? 270 : 170
+                                            }
                                             className="shadow-md my-5 ml-5"
                                             onClick={() => handleClick(data)}
                                             onLoad={() =>
@@ -173,38 +196,41 @@ function ItemsPaket({ datas, sendDataToParent, edit, delet, dataEdit }) {
                         )}
                     </motion.span>
                 ))}
-                {/* 
-
-
-            
-            <Modal id={id} show={show}>
-                <div
-                    className="bg-center bg-no-repeat bg-cover  flex flex-col justify-center items-center"
-                    style={{ backgroundImage: `url(${bgUmroh})` }}
-                >
-                    <div className="flex items-center justify-center">
-                        <button onClick={() => setShow(!show)}>
-                            <IoCloseCircleOutline className="text-white text-2xl font-semibold my-2" />
-                        </button>
-                    </div>
-                    <img srcSet={image} width={314} height={457} />
-                    <div className="flex items-center justify-center">
+                {image && (
+                    <Modal id={id} show={show}>
                         <div
-                            className="bg-green-700 flex px-5 rounded-md py-2 my-2 text-xl text-white gap-x-3 hover:cursor-pointer"
-                            style={{ fontFamily: "Jano Sans Pro, sans-serif" }}
-                            onClick={handleClickWa}
+                            className="bg-center bg-no-repeat bg-cover  flex flex-col justify-center items-center"
+                            style={{ backgroundImage: `url(${bgUmroh})` }}
                         >
-                            <button>
-                                <RiWhatsappFill />
-                            </button>
-                            <span className="text-md font-medium">
-                                Chat Admin
-                            </span>
+                            <div className="flex items-center justify-center">
+                                <button onClick={() => setShow(!show)}>
+                                    <IoCloseCircleOutline className="text-white text-2xl font-semibold my-2" />
+                                </button>
+                            </div>
+                            <img
+                                srcSet={image ? image : noImg}
+                                width={314}
+                                height={457}
+                            />
+                            <div className="flex items-center justify-center">
+                                <div
+                                    className="bg-green-700 flex px-5 rounded-md py-2 my-2 text-xl text-white gap-x-3 hover:cursor-pointer"
+                                    style={{
+                                        fontFamily: "Jano Sans Pro, sans-serif",
+                                    }}
+                                    onClick={handleClickWa}
+                                >
+                                    <button>
+                                        <RiWhatsappFill />
+                                    </button>
+                                    <span className="text-md font-medium">
+                                        Chat Admin
+                                    </span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </Modal>
-            {/* End Modal */}
+                    </Modal>
+                )}
 
                 <AnimatePresence>
                     {datasEdit && (
@@ -230,10 +256,53 @@ function ItemsPaket({ datas, sendDataToParent, edit, delet, dataEdit }) {
                         </motion.div>
                     )}
                 </AnimatePresence>
-                <Modal show={delet} id="id-delete">
-                    Are You Sure to Delete
-                    <button onClick={() => handleDelete()}>close</button>
-                </Modal>
+                <AnimatePresence>
+                    {dataDelete && showDel && (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="fixed top-0 backdrop-blur-sm left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50"
+                        >
+                            <motion.div
+                                initial={{ y: -50, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                exit={{ y: -50, opacity: 0 }}
+                                className="bg-white w-1/3 p-4 rounded-md modal"
+                                ref={modalDel}
+                            >
+                                {/* Your modal content goes here */}
+                                <p>Yakin ingin menghapus {dataDelete.name}?</p>
+                                <div>
+                                    <div className="flex justify-center items-center rounded-md ">
+                                        <img
+                                            src={`/storage/images/${dataDelete.img}`}
+                                            alt="Image Preview"
+                                            style={{ maxWidth: "160px" }}
+                                            className="rounded-md drop-shadow-md"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="flex justify-between mt-5">
+                                    <button
+                                        onClick={() => setShowDel(!showDel)}
+                                        className="py-2 px-4 rounded-md bg-[#ce2f2f] text-white font-semibold"
+                                    >
+                                        Kembali
+                                    </button>
+                                    <form onSubmit={handleDeleted}>
+                                        <button
+                                            type="submit"
+                                            className="py-2 px-4 rounded-md bg-[#C69749] text-white font-semibold"
+                                        >
+                                            Hapus
+                                        </button>
+                                    </form>
+                                </div>
+                            </motion.div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
         </>
     );
