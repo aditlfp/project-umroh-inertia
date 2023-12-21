@@ -12,6 +12,7 @@ function PaketIndex({ paket }) {
     const [showDel, setShowDel] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
     const [dataEdit, setDataEdit] = useState(false);
+    const [loading, setLoading] = useState();
     const page = usePage();
     // console.log(paket);
 
@@ -48,19 +49,35 @@ function PaketIndex({ paket }) {
         setDataEdit(id);
     }
 
+    const handleDataFromChild = (data) => {
+        // Process or use the received data in the parent component
+        setLoading(data);
+        // console.log("Received data in parent:", data);
+    };
+
     return (
         <>
             <ToastContainer />
             <Authenticated>
                 <div className="flex flex-col">
-                    <div className="flex items-center justify-end mx-10">
-                        <button
-                            onClick={() => modalCreate()}
-                            className="py-2 px-4 rounded-md bg-[#C69749] text-white font-semibold"
-                        >
-                            add new +
-                        </button>
-                    </div>
+                    {loading ? (
+                        <div className="flex justify-center items-center w-full h-full">
+                            <p className="text-center animate-pulse font-bold">
+                                Loading...
+                            </p>
+                        </div>
+                    ) : (
+                        <>
+                            <div className="flex items-center justify-end mx-10">
+                                <button
+                                    onClick={() => modalCreate()}
+                                    className="py-2 px-4 rounded-md bg-[#C69749] text-white font-semibold"
+                                >
+                                    add new +
+                                </button>
+                            </div>
+                        </>
+                    )}
                     <ItemsPaket
                         datas={paket}
                         handleDelete={() => handleDelete()}
@@ -68,6 +85,7 @@ function PaketIndex({ paket }) {
                         edit={showEdit}
                         delet={showDel}
                         dataEdit={dataEdit}
+                        sendDataToParent={handleDataFromChild}
                     />
                 </div>
                 <AnimatePresence>
