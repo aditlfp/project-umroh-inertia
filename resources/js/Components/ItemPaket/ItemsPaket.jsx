@@ -11,10 +11,11 @@ import Modal from "../Modal";
 import { TbTrashXFilled } from "react-icons/tb";
 import PaketEDit from "@/Pages/Admin/Paket/PaketEdit";
 import PaketEdit from "@/Pages/Admin/Paket/PaketEdit";
-import { router } from "@inertiajs/react";
+import { router, usePage } from "@inertiajs/react";
 import { toast } from "react-toastify";
 
 function ItemsPaket({ datas, sendDataToParent, edit, delet, dataEdit }) {
+    // console.log(datas, "item");
     const [show, setShow] = useState(false);
     const [showDel, setShowDel] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
@@ -26,6 +27,8 @@ function ItemsPaket({ datas, sendDataToParent, edit, delet, dataEdit }) {
     const [ref, inView] = useInView({
         triggerOnce: true,
     });
+    const page = usePage();
+    console.log(page.props.auth.user);
 
     useEffect(() => {
         if (inView) {
@@ -49,9 +52,9 @@ function ItemsPaket({ datas, sendDataToParent, edit, delet, dataEdit }) {
         }
     };
 
-    useEffect(() => {
-        sendDataToParent(imageLoading); // Call the function passed from the parent and send the data
-    });
+    // useEffect(() => {
+    //     sendDataToParent(imageLoading);
+    // });
 
     const handleClickWa = () => {
         //
@@ -116,7 +119,7 @@ function ItemsPaket({ datas, sendDataToParent, edit, delet, dataEdit }) {
                     console.error("Error checking image existence:", error);
                 });
         }
-    }, [datas.data]);
+    }, [datas?.data]);
 
     return (
         <>
@@ -161,36 +164,40 @@ function ItemsPaket({ datas, sendDataToParent, edit, delet, dataEdit }) {
                                             } // Set imageLoading to false when the image loads
                                         />
                                     </div>
-                                    <div className="flex flex-col gap-y-2">
-                                        <motion.button
-                                            whileHover={{
-                                                backgroundColor:
-                                                    "rgb(203 213 225)",
-                                                cursor: "pointer",
-                                            }}
-                                            whileTap={{ scale: 0.5 }}
-                                            className="bg-slate-100 bg-opacity-50 backdrop-filter backdrop-blur-lg  backdrop-saturate-150 shadow-sm p-2 rounded-full"
-                                            onClick={() =>
-                                                handleDelete(data.id)
-                                            }
-                                            name="buttonEdit"
-                                        >
-                                            <TbTrashXFilled className="text-red-500 text-xl" />
-                                        </motion.button>
-                                        <motion.button
-                                            whileHover={{
-                                                backgroundColor:
-                                                    "rgb(203 213 225)",
-                                                cursor: "pointer",
-                                            }}
-                                            whileTap={{ scale: 0.5 }}
-                                            className="bg-slate-100 bg-opacity-50 backdrop-filter backdrop-blur-lg  backdrop-saturate-150 shadow-sm p-2 rounded-full"
-                                            onClick={() => handleEdit(data.id)}
-                                            name="buttonDelete"
-                                        >
-                                            <FaRegEdit className="text-yellow-500 ml-0.5 text-xl" />
-                                        </motion.button>
-                                    </div>
+                                    {page.props.auth.user && (
+                                        <div className="flex flex-col gap-y-2">
+                                            <motion.button
+                                                whileHover={{
+                                                    backgroundColor:
+                                                        "rgb(203 213 225)",
+                                                    cursor: "pointer",
+                                                }}
+                                                whileTap={{ scale: 0.5 }}
+                                                className="bg-slate-100 bg-opacity-50 backdrop-filter backdrop-blur-lg  backdrop-saturate-150 shadow-sm p-2 rounded-full"
+                                                onClick={() =>
+                                                    handleDelete(data.id)
+                                                }
+                                                name="buttonEdit"
+                                            >
+                                                <TbTrashXFilled className="text-red-500 text-xl" />
+                                            </motion.button>
+                                            <motion.button
+                                                whileHover={{
+                                                    backgroundColor:
+                                                        "rgb(203 213 225)",
+                                                    cursor: "pointer",
+                                                }}
+                                                whileTap={{ scale: 0.5 }}
+                                                className="bg-slate-100 bg-opacity-50 backdrop-filter backdrop-blur-lg  backdrop-saturate-150 shadow-sm p-2 rounded-full"
+                                                onClick={() =>
+                                                    handleEdit(data.id)
+                                                }
+                                                name="buttonDelete"
+                                            >
+                                                <FaRegEdit className="text-yellow-500 ml-0.5 text-xl" />
+                                            </motion.button>
+                                        </div>
+                                    )}
                                 </motion.span>
                             </>
                         )}

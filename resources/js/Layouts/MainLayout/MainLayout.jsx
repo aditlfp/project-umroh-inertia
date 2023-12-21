@@ -10,20 +10,22 @@ import MottoLayout from "../MottoLayout/MottoLayout";
 import PaketLayout from "../PaketLayout/PaketLayout";
 import TipsLayout from "../TipsLayout/TipsLayout";
 
-function MainLayout(
+function MainLayout({
     dataHero,
     dataFoto,
     dataHotel,
     dataMoto,
     dataPaket,
-    dataTips
-) {
+    dataTips,
+}) {
     // dataHero={hero}
     // dataFoto={foto}
     // dataHotel={hotel}
     // dataMoto={moto}
     // dataPaket={paket}
     // dataTips={tips}
+
+    console.log(dataPaket);
 
     const [paket, setPaket] = useState();
 
