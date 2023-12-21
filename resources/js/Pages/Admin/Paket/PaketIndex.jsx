@@ -9,8 +9,11 @@ import { usePage } from "@inertiajs/react";
 
 function PaketIndex({ paket }) {
     const [modalPaket, setModalPaket] = useState(false);
+    const [showDel, setShowDel] = useState(false);
+    const [showEdit, setShowEdit] = useState(false);
+    const [dataEdit, setDataEdit] = useState(false);
     const page = usePage();
-    console.log(paket);
+    // console.log(paket);
 
     const modalRef = useRef(null);
 
@@ -34,6 +37,16 @@ function PaketIndex({ paket }) {
     const closeModal = () => {
         setModalPaket(false);
     };
+    function handleDelete() {
+        setShowDel(!showDel);
+    }
+    function handleEdit() {
+        setShowEdit(!showEdit);
+    }
+
+    function datasEdit(id) {
+        setDataEdit(id);
+    }
 
     return (
         <>
@@ -48,7 +61,14 @@ function PaketIndex({ paket }) {
                             add new +
                         </button>
                     </div>
-                    <ItemsPaket datas={paket} />
+                    <ItemsPaket
+                        datas={paket}
+                        handleDelete={() => handleDelete()}
+                        handleEdit={() => handleEdit()}
+                        edit={showEdit}
+                        delet={showDel}
+                        dataEdit={dataEdit}
+                    />
                 </div>
                 <AnimatePresence>
                     {modalPaket && (

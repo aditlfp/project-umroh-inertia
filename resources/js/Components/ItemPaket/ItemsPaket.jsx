@@ -1,15 +1,29 @@
-import { motion, useAnimation } from "framer-motion";
+import { AnimatePresence, motion, useAnimation } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { RiWhatsappFill } from "react-icons/ri";
 import { useInView } from "react-intersection-observer";
 import bgUmroh from "../../../img-local/umroh.jpg";
+import noImg from "../../../img-local/no-image.jpg";
 import Modal from "../Modal";
+import { TbTrashXFilled } from "react-icons/tb";
+import { FaRegEdit } from "react-icons/fa";
+import PaketEDit from "@/Pages/Admin/Paket/PaketEdit";
+import PaketEdit from "@/Pages/Admin/Paket/PaketEdit";
 
-function ItemsPaket({ datas }) {
+function ItemsPaket({
+    datas,
+
+    edit,
+    delet,
+    dataEdit,
+}) {
     console.log(datas);
     const [show, setShow] = useState(false);
+    const [showDel, setShowDel] = useState(false);
+    const [showEdit, setShowEdit] = useState(false);
+    const [datasEdit, setDatasEdit] = useState();
     const refs = useRef(null);
     const [image, setImage] = useState();
     const [id, setId] = useState();
@@ -37,15 +51,18 @@ function ItemsPaket({ datas }) {
     // console.log(data.datas[0]);
 
     const handleClick = (id) => {
-        if (data.datas.some((item) => item.id == id)) {
-            const img = document.getElementById(`${id}`);
-            const src = img.src;
+        const item = datas.data.find((item) => item.id === id);
+
+        if (item) {
+            const { img } = item;
+            console.log(item); // Replace 'imageSrc' with the actual property name containing the image URL
             console.log(id, true);
-            setImage(src);
+            setImage("/storage/images/" + img);
             setId(id);
             setShow(!show);
+            dataEdit(item);
         } else {
-            console.log(false);
+            // console.log(false);
         }
     };
 
@@ -60,86 +77,81 @@ function ItemsPaket({ datas }) {
         );
     };
 
+    function handleDelete() {
+        setShowDel(!showDel);
+    }
+
+    function handleEdit(id) {
+        const item = datas.data.find((item) => item.id === id);
+        setShowEdit(!showEdit);
+        setDatasEdit(item);
+    }
+    const modalRef = useRef(null);
+
     return (
-        <div className="grid grid-cols-4" id="pilihan-paket">
+        <div className="grid grid-cols-4 gap-4" id="pilihan-paket">
             <Helmet>
                 <link
                     href="https://fonts.cdnfonts.com/css/jano-sans-pro"
                     rel="stylesheet"
                 />
             </Helmet>
-            {datas.data.map((dat, i) => (
-                <motion.div
+
+            {datas.data.map((data, i) => (
+                <motion.span
+                    key={i}
+                    className="flex border items-center mt-5"
                     whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    className="box hover:cursor-pointer my-4"
                 >
-                    <motion.div
+                    <motion.span
+                        className="flex border items-center"
                         ref={ref}
                         initial={{ opacity: 0, y: 20 }}
                         animate={controls}
                         transition={{ duration: 0.6 }}
-                        className="mx-10 mb-10"
-                        onClick={() => handleClick(data.datas[0].id)}
                     >
-                        <span>
+                        <div>
                             <img
-                                id="1"
-                                className="w-[200px] h-[375px] shadow"
-                                src={`/storage/images/${dat.img}`} // Adjust the path to the image
-                                alt={`Image ${dat.id}`}
+                                srcSet={
+                                    `/storage/images/${data.img}`
+                                        ? `/storage/images/${data.img}`
+                                        : noImg
+                                }
+                                alt="image"
+                                width={270}
+                                className="shadow-md my-5 ml-5"
+                                onClick={() => handleClick(data.id)}
                             />
-                            <span className="flex justify-between mx-5">
-                                <button className="py-2 px-4 rounded-lg">
-                                    edit
-                                </button>
-                                <button>Hapus</button>
-                            </span>
-                        </span>
-                    </motion.div>
-                </motion.div>
+                        </div>
+                        <div className="flex flex-col gap-y-2">
+                            <motion.button
+                                whileHover={{
+                                    backgroundColor: "rgb(203 213 225)",
+                                    cursor: "pointer",
+                                }}
+                                whileTap={{ scale: 0.5 }}
+                                className="bg-slate-100 bg-opacity-50 backdrop-filter backdrop-blur-lg  backdrop-saturate-150 shadow-sm p-2 rounded-full"
+                                onClick={() => handleDelete(data.id)}
+                            >
+                                <TbTrashXFilled className="text-red-500 text-xl" />
+                            </motion.button>
+                            <motion.button
+                                whileHover={{
+                                    backgroundColor: "rgb(203 213 225)",
+                                    cursor: "pointer",
+                                }}
+                                whileTap={{ scale: 0.5 }}
+                                className="bg-slate-100 bg-opacity-50 backdrop-filter backdrop-blur-lg  backdrop-saturate-150 shadow-sm p-2 rounded-full"
+                                onClick={() => handleEdit(data.id)}
+                            >
+                                <FaRegEdit className="text-yellow-500 ml-0.5 text-xl" />
+                            </motion.button>
+                        </div>
+                    </motion.span>
+                </motion.span>
             ))}
             {/* 
-<motion.div
-    whileHover={{ scale: 1.1 }}
-    whileTap={{ scale: 0.9 }}
-    className="box hover:cursor-pointer"
->
-    <motion.div
-        ref={ref}
-        initial={{ opacity: 0, y: 20 }}
-        animate={controls}
-        transition={{ duration: 1.0 }}
-        className="mx-10 mb-10"
-        onClick={() => handleClick(data.datas[1].id)}
-    >
-        <img
-            id="2"
-            className="w-[314px] h-[457px] shadow"
-            src="https://placehold.jp/3d4070/ffffff/314x457.png"
-        />
-    </motion.div>
-</motion.div>
 
-<motion.div
-    whileHover={{ scale: 1.1 }}
-    whileTap={{ scale: 0.9 }}
-    className="box hover:cursor-pointer"
->
-    <motion.div
-        ref={ref}
-        initial={{ opacity: 0, y: 20 }}
-        animate={controls}
-        transition={{ duration: 1.4 }}
-        className="mx-10 mb-10"
-    >
-        <img
-            className="w-[314px] h-[457px] shadow"
-            src="https://placehold.jp/314x457.png"
-        />
-    </motion.div>
-</motion.div>
- */}
 
             {/* Change This To Data Dynamic */}
 
@@ -172,6 +184,35 @@ function ItemsPaket({ datas }) {
                 </div>
             </Modal>
             {/* End Modal */}
+
+            <AnimatePresence>
+                {datasEdit && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed top-0 backdrop-blur-sm left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50"
+                    >
+                        <motion.div
+                            initial={{ y: -50, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            exit={{ y: -50, opacity: 0 }}
+                            className="bg-white w-1/3 p-4 rounded-md modal"
+                            ref={modalRef}
+                        >
+                            {/* Your modal content goes here */}
+                            <PaketEdit
+                                datas={datasEdit}
+                                closeModal={() => handleEdit()}
+                            />
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+            <Modal show={delet} id="id-delete">
+                Are You Sure to Delete
+                <button onClick={() => handleDelete()}>close</button>
+            </Modal>
         </div>
     );
 }

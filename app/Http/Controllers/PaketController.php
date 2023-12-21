@@ -88,7 +88,7 @@ class PaketController extends Controller
                 return redirect()->back()->with(['message' => 'Paket Not Found']);
             }
             $paketId->update($paket);
-            return to_route('paket.index')->with(['message' => 'Paket Has Been Updated!']);
+            return redirect()->back()->with(['message' => 'Paket Has Been Updated!']);
         } catch (\Throwable $th) {
             Log::error($th);
             return redirect()->back()->with(['message' => 'Paket Not Found']);
