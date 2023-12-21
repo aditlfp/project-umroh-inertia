@@ -12,4 +12,9 @@ class Hotel extends Model
     protected $fillable = [
         'img'
     ];
+
+    public function Motto()
+    {
+        return $this->hasMany(Motto::class);
+    }
 }
