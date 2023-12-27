@@ -59,34 +59,32 @@ function PaketIndex({ paket }) {
         <>
             <ToastContainer />
             <Authenticated>
-                <div className="flex flex-col">
-                    {loading ? (
-                        <div className="flex justify-center items-center w-full h-full">
-                            <p className="text-center animate-pulse font-bold">
-                                Loading...
-                            </p>
+                <div className="flex flex-col items-center">
+                    <span className="text-lg font-semibold bg-[#C69749] text-white p-2 rounded-md">
+                        Data Paket
+                    </span>
+
+                    <div>
+                        <div className="flex justify-end">
+                            <button
+                                onClick={() => modalCreate}
+                                className="bg-[#C69749] p-3 text-white font-semibold rounded-md"
+                            >
+                                new data +
+                            </button>
                         </div>
-                    ) : (
                         <>
-                            <div className="flex items-center justify-end mx-10">
-                                <button
-                                    onClick={() => modalCreate()}
-                                    className="py-2 px-4 rounded-md bg-[#C69749] text-white font-semibold"
-                                >
-                                    add new +
-                                </button>
-                            </div>
+                            <ItemsPaket
+                                datas={paket}
+                                handleDelete={() => handleDelete()}
+                                handleEdit={() => handleEdit()}
+                                edit={showEdit}
+                                delet={showDel}
+                                dataEdit={dataEdit}
+                                sendDataToParent={handleDataFromChild}
+                            />
                         </>
-                    )}
-                    <ItemsPaket
-                        datas={paket}
-                        handleDelete={() => handleDelete()}
-                        handleEdit={() => handleEdit()}
-                        edit={showEdit}
-                        delet={showDel}
-                        dataEdit={dataEdit}
-                        sendDataToParent={handleDataFromChild}
-                    />
+                    </div>
                 </div>
                 <AnimatePresence>
                     {modalPaket && (

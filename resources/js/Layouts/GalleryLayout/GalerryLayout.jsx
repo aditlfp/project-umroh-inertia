@@ -1,7 +1,7 @@
 import ItemGalerry from "@/Components/ItemGalerry/ItemGalerry";
 import { Helmet } from "react-helmet";
 
-function GalerryLayout() {
+function GalerryLayout({ props }) {
     return (
         <>
             {/* Helmet */}
@@ -24,20 +24,20 @@ function GalerryLayout() {
             {/* Helmet */}
             <div className="flex flex-col mx-9">
                 <span
-                    className="uppercase font-semibold text-gray-500 text-lg"
+                    className="uppercase font-semibold text-gray-500 text-base sm:text-lg"
                     style={{ fontFamily: "Poppins, sans-serif" }}
                 >
                     aman & berpengalaman
                 </span>
                 <span
-                    className="uppercase font-semibold text-indigo-950 text-6xl"
+                    className="uppercase font-semibold text-indigo-950 text-3xl sm:text-6xl"
                     style={{ fontFamily: "Volkhov, sans-serif" }}
                 >
                     Galeri
                 </span>
             </div>
             <div className="flex mx-9 my-5">
-              <ItemGalerry />
+                <ItemGalerry datas={props} />
             </div>
         </>
     );

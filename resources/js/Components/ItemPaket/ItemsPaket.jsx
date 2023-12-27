@@ -28,7 +28,7 @@ function ItemsPaket({ datas, sendDataToParent, edit, delet, dataEdit }) {
         triggerOnce: true,
     });
     const page = usePage();
-    console.log(page.props.auth.user);
+    // console.log(page.props.auth.user);
 
     useEffect(() => {
         if (inView) {
@@ -123,7 +123,10 @@ function ItemsPaket({ datas, sendDataToParent, edit, delet, dataEdit }) {
 
     return (
         <>
-            <div className="grid grid-cols-4 gap-4" id="pilihan-paket">
+            <div
+                className="grid grid-cols-4 gap-4 ml-8 sm:ml-0"
+                id="pilihan-paket"
+            >
                 <Helmet>
                     <link
                         href="https://fonts.cdnfonts.com/css/jano-sans-pro"
@@ -134,7 +137,7 @@ function ItemsPaket({ datas, sendDataToParent, edit, delet, dataEdit }) {
                 {datas.data.map((data, i) => (
                     <motion.span
                         key={i}
-                        className="flex items-center mt-5"
+                        className="flex items-center  mt-5 w-[125%] sm:w-[100%]"
                         whileHover={{ scale: 1.1 }}
                     >
                         {!imageLoading && (
@@ -146,7 +149,7 @@ function ItemsPaket({ datas, sendDataToParent, edit, delet, dataEdit }) {
                                     animate={controls}
                                     transition={{ duration: 0.6 }}
                                 >
-                                    <div className="flex items-center justify-center">
+                                    <div className="flex items-center justify-center ">
                                         <img
                                             src={
                                                 imageExistsArray[i]
@@ -157,7 +160,7 @@ function ItemsPaket({ datas, sendDataToParent, edit, delet, dataEdit }) {
                                             width={
                                                 imageExistsArray[i] ? 270 : 170
                                             }
-                                            className="shadow-md my-5 ml-5"
+                                            className="shadow-md my-5 mx-5"
                                             onClick={() => handleClick(data)}
                                             onLoad={() =>
                                                 setImageLoading(false)

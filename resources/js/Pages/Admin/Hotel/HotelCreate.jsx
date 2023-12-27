@@ -2,10 +2,9 @@ import { useForm } from "@inertiajs/react";
 import { RiImageAddLine } from "react-icons/ri";
 import { toast } from "react-toastify";
 
-export default function FotoCreate({ closeModal }) {
+export default function HotelCreate({ closeModal }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         img: "",
-        desc: "",
     });
     const submit = (e) => {
         e.preventDefault();
@@ -14,9 +13,9 @@ export default function FotoCreate({ closeModal }) {
             toast.error("Tolong Masukkan Gambar");
             return; // Prevent further execution of the form submission
         }
-        post(route("galery.store"), {
+        post(route("hotel.store"), {
             onSuccess: () => {
-                toast.success("Foto Has Been Created!");
+                toast.success("Hotel Has Been Created!");
                 closeModal();
             },
         });
@@ -25,7 +24,6 @@ export default function FotoCreate({ closeModal }) {
     const submitForm = (e) => {
         submit(e);
     };
-
     return (
         <div>
             <form
@@ -34,7 +32,7 @@ export default function FotoCreate({ closeModal }) {
                 encType="multipart/form-data"
             >
                 <span className="flex justify-center items-center text-lg font-bold">
-                    <p>Tambah Foto</p>
+                    <p>Tambah Foto Hotel</p>
                 </span>
                 <div className="my-2 flex flex-col">
                     <label htmlFor="img">Upload Gambar</label>
@@ -75,18 +73,6 @@ export default function FotoCreate({ closeModal }) {
                             </label>
                         </div>
                     )}
-                </div>
-                <div className="my-2 flex flex-col">
-                    <label>Deskripsi</label>
-                    <textarea
-                        cols="5"
-                        rows="5"
-                        className="rounded-lg drop-shadow-md"
-                        placeholder="Masukkan deskripsi..."
-                        onChange={(e) => setData("desc", e.target.value)}
-                        name="desc"
-                        value={data.desc}
-                    ></textarea>
                 </div>
             </form>
             <div className="flex justify-between mt-5">

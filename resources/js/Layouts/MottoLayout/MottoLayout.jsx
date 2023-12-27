@@ -1,7 +1,7 @@
 import MottoComponent from "@/Components/MottoComponent";
 import { Helmet } from "react-helmet";
 
-function MottoLayout() {
+function MottoLayout({ props, propsHotel }) {
     return (
         <>
             <div className="flex flex-col items-center justify-center">
@@ -27,19 +27,19 @@ function MottoLayout() {
                 </Helmet>
                 {/* Helmet */}
                 <span
-                    className="uppercase text-center text-gray-500 text-2xl font-semibold"
+                    className="uppercase text-center text-gray-500 text-lg sm:text-2xl font-semibold"
                     style={{ fontFamily: "Poppins, sans-serif" }}
                 >
                     Motto
                 </span>
                 <h1
                     style={{ fontFamily: "Volkhov, serif" }}
-                    className="capitalize text-center text-indigo-950 text-[50px] font-bold"
+                    className="capitalize text-center text-indigo-950 text-[30px] sm:text-[50px] font-bold"
                 >
                     Melayani dengan lebih baik
                 </h1>
             </div>
-            <MottoComponent />
+            <MottoComponent datas={props} hotel={propsHotel} />
         </>
     );
 }

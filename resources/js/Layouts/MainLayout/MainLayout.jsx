@@ -58,10 +58,10 @@ function MainLayout({
                 transition={{ duration: 1.1 }}
             >
                 <span id="tagline" className="flex justify-between">
-                    <div>
+                    <div className="mb-5">
                         <div
                             style={styles}
-                            className={`text-red-400 text-xl font-${Poppins} uppercase mx-10 mt-10`}
+                            className={`text-red-400 text-base sm:text-xl font-${Poppins} uppercase mx-10 mt-10`}
                         >
                             Pt. surya amanah cendikia Ponorogo
                         </div>
@@ -88,27 +88,50 @@ function MainLayout({
                         </Helmet>
                         {/* End React Helmet */}
                         <div
-                            className="text-indigo-950 text-7xl font-bold mx-9 mt-10"
+                            className="text-indigo-950 text-4xl sm:text-7xl font-bold mx-9 mt-10"
                             style={{ fontFamily: "Jano Sans Pro, sans-serif" }}
                         >
                             Umroh Berkah
                         </div>
                         <div
                             style={{ fontFamily: "Jano Sans Pro, sans-serif" }}
-                            className="text-indigo-950 text-5xl font-bold mx-9 mt-1"
+                            className="text-indigo-950 text-3xl sm:text-5xl font-bold mx-9 mt-1"
                         >
                             Bulan Ramadhan{" "}
                         </div>
                         <div
                             style={{ fontFamily: "Jano Sans Pro, sans-serif" }}
-                            className=" text-indigo-950 text-8xl font-bold mx-9 mt-1"
+                            className=" text-indigo-950 text-5xl sm:text-8xl font-bold mx-9 mt-1"
                         >
                             2024
                         </div>
 
+                        <div className="sm:hidden flex justify-center items-center">
+                            <img
+                                width={200}
+                                height={200}
+                                srcSet={Mekkah}
+                                className="absolute z-[99] "
+                                style={{ maxWidth: "100%", height: "auto" }}
+                            />
+                            <svg
+                                viewBox="0 0 200 200"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width={300}
+                                height={300}
+                                className="z-8"
+                            >
+                                <path
+                                    fill="#FFF1DA"
+                                    d="M70.4,-30.8C84.7,-15.8,85.4,17,71.4,41.3C57.4,65.6,28.7,81.5,5.2,78.5C-18.4,75.5,-36.8,53.7,-43.3,33.7C-49.7,13.8,-44.2,-4.3,-35,-16.3C-25.8,-28.3,-12.9,-34.2,7.5,-38.6C28,-43,56,-45.7,70.4,-30.8Z"
+                                    transform="translate(100 100)"
+                                />
+                            </svg>
+                        </div>
+
                         {/* SubTitle */}
                         <p
-                            className="text-gray-500 text-base break-words font-medium ml-9"
+                            className="text-gray-500 text-sm sm:text-base break-words font-medium ml-9"
                             style={{ fontFamily: "Poppins, sans-serif" }}
                         >
                             “Jarak Mekah tidak akan berubah kalau kita tidak
@@ -117,7 +140,7 @@ function MainLayout({
                         {/* End SubTitle */}
 
                         {/* Button */}
-                        <div className="flex mx-9 mt-2 gap-5 py-2">
+                        <div className="flex justify-center sm:justify-start mx-9 mt-2 gap-5 py-2 text-sm sm:text-base">
                             <button
                                 onClick={() => handleDataPush()}
                                 className="bg-amber-500 hover:bg-amber-600 active:bg-amber-700 focus:bg-amber-700 focus:ring-0 py-3 px-5 rounded-xl font-medium text-white transition ease-in-out duration-150"
@@ -133,7 +156,7 @@ function MainLayout({
                         </div>
                         {/* End Button */}
                     </div>
-                    <div>
+                    <div className="hidden sm:flex">
                         <img
                             width={500}
                             height={500}

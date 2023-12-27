@@ -1,10 +1,10 @@
-import ItemTips from '@/Components/ItemTips/ItemTips'
-import React from 'react'
-import { Helmet } from 'react-helmet'
+import ItemTips from "@/Components/ItemTips/ItemTips";
+import React from "react";
+import { Helmet } from "react-helmet";
 
-function TipsLayout() {
-  return (
-    <>
+function TipsLayout({ props }) {
+    return (
+        <>
             {/* Helmet */}
             <Helmet>
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -25,23 +25,23 @@ function TipsLayout() {
             {/* Helmet */}
             <div className="flex flex-col mx-9">
                 <span
-                    className="uppercase font-semibold text-gray-500 text-lg"
+                    className="uppercase font-semibold text-gray-500 text-base sm:text-lg"
                     style={{ fontFamily: "Poppins, sans-serif" }}
                 >
                     informasi
                 </span>
                 <span
-                    className="uppercase font-semibold text-indigo-950 text-6xl"
+                    className="uppercase font-semibold text-indigo-950 text-4xl sm:text-6xl"
                     style={{ fontFamily: "Volkhov, sans-serif" }}
                 >
                     TIPS
                 </span>
             </div>
             <div className="flex mx-9 my-2">
-              <ItemTips />
+                <ItemTips datas={props} />
             </div>
         </>
-  )
+    );
 }
 
-export default TipsLayout
+export default TipsLayout;

@@ -40,7 +40,7 @@ function PaketLayout({ dataPaket, props }) {
                 className="flex flex-col items-center justify-center my-10"
             >
                 <h1
-                    className="text-gray-500 font-semibold text-xl"
+                    className="text-gray-500 font-semibold text-lg sm:text-xl"
                     style={{ fontFamily: "Poppins, sans-serif" }}
                 >
                     {/* Change This To Dinamic */}
@@ -50,7 +50,7 @@ function PaketLayout({ dataPaket, props }) {
 
                 <h2
                     style={{ fontFamily: "Volkhov, serif" }}
-                    className="text-indigo-950 text-[50px] font-bold mt-4"
+                    className="text-indigo-950 text-[30px] sm:text-[50px] font-bold mt-4"
                 >
                     Pilihan Terbaik Anda
                 </h2>

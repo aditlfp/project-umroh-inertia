@@ -18,16 +18,23 @@ function FotoIndex({ foto }) {
     return (
         <>
             <Authenticated>
-                <div className="flex flex-col">
-                    <div className="flex items-center justify-end mx-10">
-                        <button
-                            onClick={() => modalCreate()}
-                            className="py-2 px-4 rounded-md bg-[#C69749] text-white font-semibold"
-                        >
-                            add new +
-                        </button>
+                <div className="flex flex-col items-center">
+                    <span className="text-lg font-semibold bg-[#C69749] text-white p-2 rounded-md">
+                        Foto Gallery
+                    </span>
+                    <div>
+                        <div className="flex justify-end">
+                            <button
+                                onClick={() => modalCreate()}
+                                className="bg-[#C69749] p-3 text-white font-semibold rounded-md"
+                            >
+                                new data +
+                            </button>
+                        </div>
+                        <>
+                            <ItemGalerry datas={foto} />
+                        </>
                     </div>
-                    <ItemGalerry datas={foto} />
                 </div>
                 <AnimatePresence>
                     {modalFoto && (

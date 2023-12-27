@@ -23,8 +23,9 @@ class MottoController extends Controller
             $query->where('name', 'LIKE', '%' . $search . '%');
         })->paginate(50);
         $moto =  MottoResource::collection($motto);
+        $hotel = Hotel::all();
 
-        return Inertia::render('Admin/Motto/MottoIndex', ['moto' => $moto]);
+        return Inertia::render('Admin/Motto/MottoIndex', ['moto' => $moto, 'hotel' => $hotel]);
     }
     
     public function create()

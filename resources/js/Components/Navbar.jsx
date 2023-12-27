@@ -4,13 +4,13 @@ import NavLink from "./NavLink";
 
 function Navbar() {
     return (
-        <nav className="bg-white z-[9999999999999] py-5 shadow-sm sticky top-0">
-            <div className="h-auto">
+        <nav className="bg-white z-[9999999999999] sm:py-5 py-3 shadow-sm sticky top-0 w-full drop-shadow-sm">
+            <div className="h-auto ">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center">
                         <div>
                             <svg
-                                className="ml-10 mr-5"
+                                className="ml-10 mr-5 w-[50px]"
                                 width="70"
                                 height="60"
                                 viewBox="0 0 70 60"

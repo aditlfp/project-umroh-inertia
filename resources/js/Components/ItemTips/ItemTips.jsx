@@ -45,8 +45,11 @@ function ItemTips({ datas }) {
                     rel="stylesheet"
                 />
             </Helmet>
-            {datas.data.map((data, i) => (
-                <motion.span key={i} className="flex items-center mt-5">
+            {datas?.data.map((data, i) => (
+                <motion.span
+                    key={i}
+                    className="flex items-center mt-5 w-[125%] sm:w-[100%]"
+                >
                     <motion.div
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
@@ -58,11 +61,11 @@ function ItemTips({ datas }) {
                                 srcSet={`/storage/images/${data.img}`}
                                 alt="image"
                                 width={270}
-                                className="shadow-md my-5 ml-5"
+                                className="shadow-md my-5 mx-5"
                             />
                         </div>
                         {page.props.auth.user && (
-                            <div className="flex flex-col gap-y-2">
+                            <div className="flex flex-col gap-y-2 ">
                                 <motion.button
                                     whileHover={{
                                         backgroundColor: "rgb(203 213 225)",
