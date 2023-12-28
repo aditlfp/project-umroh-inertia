@@ -71,6 +71,7 @@ function MottoComponent({ datas, hotel }) {
                                             <img
                                                 src={Hotel}
                                                 className="sm:w-full scale-50"
+                                                alt="hotel"
                                             />
                                         </div>
                                         <div
@@ -112,6 +113,7 @@ function MottoComponent({ datas, hotel }) {
                                             <img
                                                 src={Maskapai}
                                                 className="scale-[50%]"
+                                                alt="maskapai"
                                             />
                                         </div>
                                         <div

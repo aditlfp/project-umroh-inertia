@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 
 function PaketLayout({ dataPaket, props }) {
-    console.log("from layout", props);
+    // console.log("from layout", props);
     useEffect(() => {
         if (dataPaket) {
             // 👇 Will scroll smoothly to the top of the next section
@@ -12,7 +12,7 @@ function PaketLayout({ dataPaket, props }) {
                 nextSection.scrollIntoView({ behavior: "smooth" });
             } else {
                 // Handle the case where there is no next section
-                console.warn("No next section found.");
+                // console.warn("No next section found.");
             }
         }
     }, [dataPaket]);

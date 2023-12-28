@@ -47,7 +47,7 @@ class HeroController extends Controller
 
         try {
             Hero::create($hero);
-            return to_route('hero-section.index')->with(['message' => 'Hero Section Has Been Created!']);
+            return redirect()->back()->with(['message' => 'Hero Section Has Been Created!']);
         } catch(\Illuminate\Database\QueryException $e){
            return redirect()->back()->with(['message' => 'Foto Has Found!']);
         }

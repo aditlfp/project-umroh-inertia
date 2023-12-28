@@ -23,8 +23,8 @@ class HeroRequest extends FormRequest
     {
         return [
             'title' => ['required'],
-            'bulan' => ['required'],
-            'tahun' => ['required'],
+            'month' => ['required'],
+            'year' => ['required'],
             'sub_title' => ['required'],
             'img' => ['required', 'mimes:png,jpg,jpeg', 'max:3072'],      
         ];

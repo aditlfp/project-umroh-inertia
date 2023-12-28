@@ -45,14 +45,24 @@ function Navbar() {
                             </svg>
                         </div>
                         <div>
-                            <img width={130} height={120} src={menara} />
+                            <img
+                                width={130}
+                                height={120}
+                                src={menara}
+                                alt="menara"
+                            />
                         </div>
                     </div>
                     <div className="flex gap-3 mx-10">
                         <NavLink className="font-bold hidden sm:block">
                             Booking
                         </NavLink>
-                        <img width={130} height={120} src={menara2} />
+                        <img
+                            width={130}
+                            height={120}
+                            src={menara2}
+                            alt="menara2"
+                        />
                     </div>
                 </div>
             </div>

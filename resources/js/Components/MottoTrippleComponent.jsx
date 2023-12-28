@@ -32,7 +32,11 @@ function MottoTrippleComponent() {
                     >
                         <div className="px-3 py-2 flex flex-col items-center justify-center mt-9">
                             <div id="img-modal">
-                                <img src={Spesial} className="scale-[70%]" />
+                                <img
+                                    src={Spesial}
+                                    className="scale-[70%]"
+                                    alt="spesial"
+                                />
                             </div>
                             <div id="title" className="flex flex-col">
                                 <div className="text-center text-indigo-950 font-semibold">
@@ -67,7 +71,11 @@ function MottoTrippleComponent() {
                     >
                         <div className="px-3 py-4 flex flex-col items-center justify-center">
                             <div id="img-modal">
-                                <img src={Achivment} className="scale-[70%]" />
+                                <img
+                                    src={Achivment}
+                                    className="scale-[70%]"
+                                    alt="achievment"
+                                />
                             </div>
                             <div id="title" className="flex flex-col">
                                 <div className="text-center text-indigo-950 font-semibold">
@@ -80,7 +88,7 @@ function MottoTrippleComponent() {
                                         fontFamily: "Poppins, sans-serif",
                                     }}
                                 >
-                                    <p className="font-semibold text-xs sm:text-md mb-10">
+                                    <div className="font-semibold text-xs sm:text-md mb-10">
                                         <ul className="list-disc flex flex-col items-center justify-center text-center">
                                             <li>Visa Umroh</li>
                                             <li>ZAM-ZAM</li>
@@ -88,7 +96,7 @@ function MottoTrippleComponent() {
                                             <li>Mutawwif & Tour Guide</li>
                                             <li>City Tour</li>
                                         </ul>
-                                    </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>

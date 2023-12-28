@@ -180,7 +180,7 @@ function ItemsPaket({ datas, sendDataToParent, edit, delet, dataEdit }) {
                                                 onClick={() =>
                                                     handleDelete(data.id)
                                                 }
-                                                name="buttonEdit"
+                                                name="buttonDelete"
                                             >
                                                 <TbTrashXFilled className="text-red-500 text-xl" />
                                             </motion.button>
@@ -195,7 +195,7 @@ function ItemsPaket({ datas, sendDataToParent, edit, delet, dataEdit }) {
                                                 onClick={() =>
                                                     handleEdit(data.id)
                                                 }
-                                                name="buttonDelete"
+                                                name="buttonEdit"
                                             >
                                                 <FaRegEdit className="text-yellow-500 ml-0.5 text-xl" />
                                             </motion.button>
