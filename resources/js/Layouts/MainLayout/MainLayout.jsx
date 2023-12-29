@@ -155,7 +155,7 @@ function MainLayout({
                                             onChange={(e) =>
                                                 setData("title", e.target.value)
                                             }
-                                            className="border-none bg-slate-300 focus:border-none outline-none text-4xl sm:text-7xl"
+                                            className="border-none bg-slate-300/50 focus:border-none outline-none text-4xl sm:text-7xl"
                                             style={{
                                                 border: "none !important",
                                                 boxShadow: "none",
@@ -183,7 +183,7 @@ function MainLayout({
                                             onChange={(e) =>
                                                 setData("month", e.target.value)
                                             }
-                                            className="border-none bg-slate-300 focus:border-none outline-none text-3xl sm:text-5xl"
+                                            className="border-none bg-slate-300/50 focus:border-none outline-none text-3xl sm:text-5xl"
                                             style={{
                                                 border: "none !important",
                                                 boxShadow: "none",
@@ -211,7 +211,7 @@ function MainLayout({
                                             onChange={(e) =>
                                                 setData("year", e.target.value)
                                             }
-                                            className="border-none bg-slate-300 focus:border-none outline-none text-5xl sm:text-8xl"
+                                            className="border-none bg-slate-300/50 focus:border-none outline-none text-5xl sm:text-8xl"
                                             style={{
                                                 border: "none !important",
                                                 boxShadow: "none",
@@ -276,7 +276,7 @@ function MainLayout({
                                                     e.target.value
                                                 )
                                             }
-                                            className="border-none bg-slate-300 focus:border-none outline-none text-sm sm:text-base"
+                                            className="border-none bg-slate-300/50 focus:border-none outline-none text-sm sm:text-base"
                                             style={{
                                                 border: "none !important",
                                                 boxShadow: "none",
@@ -292,16 +292,10 @@ function MainLayout({
 
                                 {/* Button */}
                                 <div className="flex justify-center sm:justify-start mx-9 mt-2 gap-5 py-2 text-sm sm:text-base">
-                                    <button
-                                        onClick={() => handleDataPush()}
-                                        className="bg-amber-500 hover:bg-amber-600 active:bg-amber-700 focus:bg-amber-700 focus:ring-0 py-3 px-5 rounded-xl font-medium text-white transition ease-in-out duration-150"
-                                    >
+                                    <button className="bg-amber-500 hover:bg-amber-600 active:bg-amber-700 focus:bg-amber-700 focus:ring-0 py-3 px-5 rounded-xl font-medium text-white transition ease-in-out duration-150">
                                         Lihat Paket
                                     </button>
-                                    <button
-                                        onClick={handleRedirect}
-                                        className="bg-green-800 hover:bg-green-900 active:bg-green-900 focus:bg-green-900 focus:ring-0 py-3 px-5 rounded-xl font-medium text-white transition ease-in-out duration-150"
-                                    >
+                                    <button className="bg-green-800 hover:bg-green-900 active:bg-green-900 focus:bg-green-900 focus:ring-0 py-3 px-5 rounded-xl font-medium text-white transition ease-in-out duration-150">
                                         Baca Alquran
                                     </button>
                                 </div>

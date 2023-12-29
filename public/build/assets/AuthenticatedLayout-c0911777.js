@@ -1,0 +1,1 @@
+import{r as s,j as t}from"./app-de41a49e.js";import o from"./AdminLayout-491c67cf.js";import{k as a}from"./react-toastify.esm-8dbcef16.js";function p({user:r,header:m,children:e}){return s.useState(!1),t.jsxs(t.Fragment,{children:[t.jsx(a,{}),t.jsx(o,{user:r,children:e})]})}export{p as A};

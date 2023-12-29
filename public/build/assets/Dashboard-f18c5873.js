@@ -1,0 +1,1 @@
+import{j as t}from"./app-de41a49e.js";import{A as r}from"./AuthenticatedLayout-c0911777.js";import"./AdminLayout-491c67cf.js";import"./index.esm-5262379c.js";import"./index-d3b04a38.js";import"./react-toastify.esm-8dbcef16.js";function u({auth:o}){return t.jsx(r,{})}export{u as default};
