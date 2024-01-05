@@ -44,14 +44,14 @@ function MainLayout({
             heroData.data.length == 0
                 ? "Jarak Mekah tidak akan berubah kalau kita tidak melangkah, Niat yang kuat Insya Allah berangkat."
                 : heroData.data[0].sub_title,
-        img: heroData.data.length == 0 ? "" : heroData.data[0].img,
+        img: heroData.data.length == 0 ? Mekkah : heroData.data[0].img,
         oldimage: heroData.data.length == 0 ? "" : heroData.data[0].img,
     });
 
     // if (heroData.data.length >= 1) {
-    //     console.log(true);
+    //     console.log(true, data.img);
     // } else {
-    //     console.log(false);
+    //     console.log(false, data.img);
     // }
 
     const [hero, setHero] = useState(false);
@@ -230,11 +230,9 @@ function MainLayout({
                                         width={200}
                                         height={200}
                                         srcSet={
-                                            typeof data.img === "string"
-                                                ? `storage/images/${data.img}` // If data.img is a string, use it as the image source
-                                                : !data.img
-                                                ? Mekkah
-                                                : URL.createObjectURL(data.img)
+                                            heroData.data.length >= 1
+                                                ? `storage/images/${data.img}`
+                                                : Mekkah
                                         }
                                         alt="mekkah"
                                         className="absolute z-[99] "
@@ -316,11 +314,9 @@ function MainLayout({
                                         width={500}
                                         height={500}
                                         srcSet={
-                                            typeof data.img === "string"
-                                                ? `storage/images/${data.img}` // If data.img is a string, use it as the image source
-                                                : !data.img
-                                                ? Mekkah
-                                                : URL.createObjectURL(data.img)
+                                            heroData.data.length >= 1
+                                                ? `storage/images/${data.img}`
+                                                : Mekkah
                                         }
                                         alt="mekkah"
                                         className="absolute z-[99] left-[53rem]"
@@ -455,8 +451,8 @@ function MainLayout({
                                 <svg
                                     viewBox="0 0 200 200"
                                     xmlns="http://www.w3.org/2000/svg"
-                                    width={300}
-                                    height={300}
+                                    width={350}
+                                    height={350}
                                     className="z-8"
                                 >
                                     <path

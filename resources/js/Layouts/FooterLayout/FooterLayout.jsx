@@ -44,9 +44,12 @@ function FooterLayout() {
                         <p>Siman Ponorogo(UNMUH PONOROGO)</p>
                     </span>
                 </div>
-                <div id="link" className="my-10 flex">
+                <div
+                    id="link"
+                    className="my-10 flex justify-evenly sm:justify-normal"
+                >
                     {/* Comapny */}
-                    <div id="company" className=" ml-10 sm:ml-24">
+                    <div id="company" className="sm:ml-24">
                         <span
                             className="text-zinc-950 text-md sm:text-lg font-bold leading-relaxed"
                             style={{ fontFamily: "Poppins, sans-serif" }}
